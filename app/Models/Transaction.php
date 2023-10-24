@@ -45,7 +45,7 @@ class Transaction extends Model
         return $this->belongsTo(PaymentMethod::class);
     }
 
-    // relasi product
+    // relasi product   
     public function product()
     {
         return $this->belongsTo(Product::class);

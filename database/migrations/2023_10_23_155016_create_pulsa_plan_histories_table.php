@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('pulsa_plan_id')->constrained('pulsa_plans');
             $table->foreignId('transaction_id')->constrained('transactions');
             $table->string('phone_number');
-
             $table->timestamps();
         });
     }

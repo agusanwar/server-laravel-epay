@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('vendor_cards', function (Blueprint $table) {
+        Schema::create('data_plans', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('thumbnail');
-            $table->enum('status', ['active', 'inactive']);
-            
+            $table->string('price');
+            $table->foreignId('vendor_card_id')->constrained('vendor_cards');
             $table->timestamps();
         });
+
     }
 
     /**
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vendor_cards');
+        Schema::dropIfExists('data_plans');
     }
 };
