@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\Api\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\TopUpController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +15,14 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// // test api jwt
+// Route::middleware('jwt.verify')->get('/test', function (Request $request) {
+//     return 'success';
+// });
 
 Route::POST('register', [AuthController::class, 'register']);
+Route::POST('login', [AuthController::class, 'login']);
+
+Route::group(['middleware' => 'jwt.verify'], function ($router) {
+    Route::post('top_ups', [TopUpController::class, 'store']);
+});

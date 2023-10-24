@@ -7,9 +7,11 @@ use App\Models\Wallet;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Tymon\JWTAuth\Exceptions\JWTException;
 use Melihovv\Base64ImageDecoder\Base64ImageDecoder;
 
 class AuthController extends Controller
@@ -75,10 +77,16 @@ class AuthController extends Controller
             // 10. jika success add data to database
             DB::commit();
 
+            // 12. register to automatic login & get token
+            $token = JWTAuth::attempt(['email' => $request->email, 'password' => $request->password ]);
 
+            // 13. gett data user
+            $userResponse = getUser($request->email);
+            $userResponse->token = $token;
+            $userResponse->token_expires_in = auth()->factory()->getTTL() * 60;
+            $userResponse->token_type = 'bearer';
 
-
-
+            return response()->json($userResponse);
         } catch (\Throwable $th) {
             throw $th;
             // 11. jika prosses data error
@@ -87,8 +95,52 @@ class AuthController extends Controller
             // 8. if check error (proses test 3)
             return response()->json(['message' => $th->getMessage()], 500);
         }
+    }
 
+    // API LOGIN
+    public function login(Request $request)
+    {   
+        // 1. request only email and pass
+        $credentials = $request->only('email', 'password');
 
+        // 2. validasi data
+        $validator = Validator::make($credentials, [
+            'email' => 'required|email',
+            'password' => 'required|string|min:6',
+        ]);
+
+        // 3. validasi jika error
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->messages()], 400);
+        }
+
+        try {
+            // 4. generate token success (test: 1)
+            $token = JWTAuth::attempt($credentials);
+
+            // 5. token salah
+            if (!$token) {
+                return response()->json(['message' => 'Login credentials are invalid'], 400);
+            }
+
+            // 7. get data user in halpers
+            $userResponse = getUser($request->email);
+
+            // 8. set token
+            $userResponse->token = $token;
+
+            // 9. set token expired
+            $userResponse->token_expires_in = auth()->factory()->getTTL() * 60;
+            $userResponse->token_type = 'bearer';
+
+            return response()->json($userResponse);
+            // return $token;
+        } catch (JWTException $e) {
+            // 6. step 1. error
+             return response()->json(['message' => $e->getMessage(), 500]);
+        }
+       
+      
     }
 
     // 5. upload image base 64
