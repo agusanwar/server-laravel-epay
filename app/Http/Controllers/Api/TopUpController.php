@@ -36,7 +36,7 @@ class TopUpController extends Controller
         $pinChaker = pinChacker($request->pin);
 
         if(!$pinChaker){
-            return response()->json(['message' => 'PIN is Wrong']);
+            return response()->json(['message' => 'PIN is Wrong'], 400);
         }
 
         // 2. insert data to database tb transaction (test:2 to database)

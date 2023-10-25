@@ -15,33 +15,40 @@ class TransactionTypeSeeder extends Seeder
     {
         DB::table('transaction_types')->insert([
             [
-             'name' => 'Transfer',
-             'code' => 'transfer',
+             'name' => 'Pulsa',
+             'code' => 'pulsa',
              'action' => 'cr',
              'created_at' => now(),
              'updated_at' => now(),
             ],
-            [
-            'name' => 'Internet',
-            'code' => 'internet',
-            'action' => 'dr',
-            'created_at' => now(),
-            'updated_at' => now(),
-            ],
-            [
-            'name' => 'Top Up',
-            'code' => 'top_up',
-            'action' => 'cr',
-            'created_at' => now(),
-            'updated_at' => now(),
-            ],
-            [
-            'name' => 'Receive',
-            'code' => 'receive',
-            'action' => 'cr',
-            'created_at' => now(),
-            'updated_at' => now(),
-            ],
+            // [
+            //  'name' => 'Transfer',
+            //  'code' => 'transfer',
+            //  'action' => 'cr',
+            //  'created_at' => now(),
+            //  'updated_at' => now(),
+            // ],
+            // [
+            // 'name' => 'Internet',
+            // 'code' => 'internet',
+            // 'action' => 'dr',
+            // 'created_at' => now(),
+            // 'updated_at' => now(),
+            // ],
+            // [
+            // 'name' => 'Top Up',
+            // 'code' => 'top_up',
+            // 'action' => 'cr',
+            // 'created_at' => now(),
+            // 'updated_at' => now(),
+            // ],
+            // [
+            // 'name' => 'Receive',
+            // 'code' => 'receive',
+            // 'action' => 'cr',
+            // 'created_at' => now(),
+            // 'updated_at' => now(),
+            // ],
          ]);
     }
 }

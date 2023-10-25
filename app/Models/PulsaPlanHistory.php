@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PulsaData extends Model
+class PulsaPlanHistory extends Model
 {
     use HasFactory;
 
-    protected $table = 'pulsa_plans';
+    protected $table = 'pulsa_plan_histories';
 
     protected $fillable = [
-        'name',
-        'price',
-        'vendor_card_id'
+        'pulsa_plan_id',
+        'transaction_id',
+        'phone_number'
     ];
 }

@@ -175,4 +175,11 @@ class AuthController extends Controller
 
         return $result;
     }
+
+
+    public function logout(){
+        auth()->logout();
+
+        return response()->json(['message' => 'Logout Success']);
+    }
 }

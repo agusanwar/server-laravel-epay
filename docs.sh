@@ -28,3 +28,7 @@ midtrans
         . MIDTRANS_IS_PRODUCTION=false
         . MIDTRANS_IS_SANITIZED=true
         . MIDTRANS_IS_3DS=true
+
+WebHook for midtrans
+    - create controller webhook
+    - 
