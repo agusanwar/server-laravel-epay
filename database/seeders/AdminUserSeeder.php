@@ -14,15 +14,20 @@ class AdminUserSeeder extends Seeder
     public function run(): void
     {
         DB::table('admin_users')->insert([
+            // [ 
+            //      'name' => 'Anwar sha',
+            //      'email' => 'anwarsha@ai.com',
+            //      'password' => bcrypt('123456')
+            //  ],
+            // [ 
+            //      'name' => 'Admin Epay',
+            //      'email' => 'admin@gmail.com',
+            //      'password' => bcrypt('123456')
+            //  ],
             [ 
-                 'name' => 'Anwar sha',
-                 'email' => 'anwarsha@si.com',
-                 'password' => bcrypt('anwahsha')
-             ],
-            [ 
-                 'name' => 'Admin Epay',
-                 'email' => 'adminepay@ai.com',
-                 'password' => bcrypt('adminepay')
+                 'name' => 'Admin 3',
+                 'email' => 'adminepay@gmail.com',
+                 'password' => bcrypt('123456')
              ],
          ]);
     }
